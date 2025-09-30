@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getApiUrl } from "../lib/supabase";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ export default function Footer() {
  
     setIsLoading(true);
     try {
-      const response = await fetch('/api/newsletter/subscribe', {
+      const response = await fetch(getApiUrl('/api/newsletter/subscribe'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

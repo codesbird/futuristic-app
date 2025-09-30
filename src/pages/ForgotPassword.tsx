@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Shield, Mail, Lock, User, Key } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
+import { getApiUrl } from "../lib/supabase";
 
 
 export default function ForgotPassword() {
@@ -18,7 +19,7 @@ export default function ForgotPassword() {
         e.preventDefault();
         try {
 
-            const response = await fetch("/api/auth/forgot-password", {
+            const response = await fetch(getApiUrl("/api/auth/forgot-password"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { sendNewsletterEmail } from '../../../server/email';
+import { getApiUrl } from "../lib/supabase";
 
 // This component handles automatic newsletter sending when blog posts are published
 export function NewsletterAutomation() {
   const { data: blogPosts = [] } = useQuery({
     queryKey: ["/api/blog-posts"],
     queryFn: async () => {
-      const response = await fetch("/api/blog-posts?published=false");
+      const response = await fetch(getApiUrl("/api/blog-posts?published=false"));
       return await response.json();
     },
   });

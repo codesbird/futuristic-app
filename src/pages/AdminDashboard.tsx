@@ -44,6 +44,7 @@ import {
 import { AdminExperiencesList } from "@/components/admin-experiences-list";
 import type { Skill, Service, Project, BlogPost, ContactMessage, Experience } from "@shared/schema";
 import { SettingsItemList } from "@/components/admin-list-items";
+import { getApiUrl } from "../lib/supabase";
 
 type NavItem = {
   id: string;
@@ -93,7 +94,7 @@ export default function AdminDashboard() {
   const { data: projects = [], refetch: refetchProjects } = useQuery<Project[]>({ queryKey: ["/api/projects"] });
   const { data: blogPosts = [], refetch: refetchBlogPosts } = useQuery<BlogPost[]>({
     queryKey: ["/api/blog-posts"],
-    queryFn: () => fetch("/api/blog-posts?published=false").then(res => res.json())
+    queryFn: () => fetch(getApiUrl("/api/blog-posts?published=false")).then(res => res.json())
   });
   const { data: messages = [], refetch: refetchMessages } = useQuery<ContactMessage[]>({ queryKey: ["/api/contact-messages"] });
   const { data: experiences = [], refetch: refetchExperiences } = useQuery<Experience[]>({ queryKey: ["/api/experiences"] });

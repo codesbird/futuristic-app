@@ -122,7 +122,7 @@ export default function HeroSection() {
             <div className="relative max-w-lg mx-auto">
               {/* AI Agent with generated image */}
               <div className="aspect-video bg-gradient-to-br from-tech-light/20 to-neon-cyan/20 rounded-2xl relative overflow-hidden">
-                <video autoPlay muted loop src="assests/ai_agent.mp4" className="absolute inset-0 w-full h-full object-cover opacity-80"></video>
+                <video autoPlay muted loop src="src/assests/ai_agent.mp4" className="absolute inset-0 w-full h-full object-cover opacity-80"></video>
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/80 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="text-lg font-semibold text-white">AI-Powered Development</div>

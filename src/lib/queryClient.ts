@@ -1,5 +1,5 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
-
+/// <reference types="vite/client" />
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
     const text = (await res.text()) || res.statusText;
@@ -13,8 +13,11 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  console.log(`API Request: ${method} ${url}`, data);
-  const res = await fetch(url, {
+  const apiUrl = import.meta.env.VITE_API_URL;
+  console.log("api url is :",apiUrl)
+  const fullUrl = apiUrl ? apiUrl.replace(/\/$/, "") + (url.startsWith("/") ? url : "/" + url) : url;
+  // console.log(`API Request: ${method} ${fullUrl}`, data);
+  const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
@@ -31,7 +34,10 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
     async ({ queryKey }) => {
-      const res = await fetch(queryKey.join("/") as string, {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const urlPath = queryKey.join("/");
+      const fullUrl = apiUrl ? apiUrl.replace(/\/$/, "") + (urlPath.startsWith("/") ? urlPath : "/" + urlPath) : urlPath;
+      const res = await fetch(fullUrl, {
         credentials: "include",
       });
 

@@ -39,6 +39,12 @@ import GeneralProfile from "./DashboardSettings/general-profile";
 import TopActions from "./DashboardSettings/topactions";
 import Telegramsetup from "./DashboardSettings/telegram";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+const getApiUrl = (path: string) => {
+  if (!apiUrl) return path;
+  return apiUrl.replace(/\/$/, "") + (path.startsWith("/") ? path : "/" + path);
+};
+
 // Experience List Component
 export function ExperiencesList({ experiences, onEdit, onDelete }: {
   experiences: Experience[];
@@ -563,7 +569,7 @@ export function BlogPostsList() {
 
   const { data: blogPosts = [], isLoading } = useQuery<BlogPost[]>({
     queryKey: ["/api/blog-posts"],
-    queryFn: () => fetch("/api/blog-posts?published=false").then(res => res.json())
+    queryFn: () => fetch(getApiUrl("/api/blog-posts?published=false")).then(res => res.json())
   });
 
   const deleteMutation = useMutation({
@@ -945,7 +951,7 @@ export function ContactMessagesList() {
 export function SettingsItemList() {
   const [userData, setUserData] = useState({})
   const authuser = async () => {
-    const res = await fetch("/api/auth/user", { method: "GET" });
+    const res = await fetch(getApiUrl("/api/auth/user"), { method: "GET" });
     const data = await res.json();
     if (data.success === false) {
       return false

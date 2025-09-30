@@ -31,7 +31,9 @@ export default function Navbar() {
     { href: "#home", label: "Home", icon: Zap },
     { href: "#about", label: "About", icon: Code },
     { href: "#services", label: "Services", icon: Cpu },
-    { href: "#portfolio", label: "Portfolio", icon: Wifi },
+    { href: "#projects", label: "Projects", icon: Cpu },
+    // { href: "#blogs", label: "Blogs", icon: Cpu },
+    // { href: "#portfolio", label: "Portfolio", icon: Wifi },
     { href: "#experience", label: "Experience", icon: Code },
     { href: "#contact", label: "Contact", icon: Zap },
   ];
@@ -63,7 +65,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
             <div className="relative group">
               <div className="absolute -inset-2 bg-gradient-to-r from-tech-blue to-neon-cyan rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-300" />
-              <div className="relative text-2xl font-inter font-bold gradient-text tracking-wider">
+              <div className="relative flex text-2xl font-inter font-bold gradient-text tracking-wider">
                 <span className="inline-block hover:scale-110 transition-transform duration-300">T</span>
                 <span className="inline-block hover:scale-110 transition-transform duration-300 delay-75">E</span>
                 <span className="inline-block hover:scale-110 transition-transform duration-300 delay-150">C</span>

@@ -3,11 +3,13 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import type { BlogPost } from "@shared/schema";
 import { format } from "date-fns";
+import { getApiUrl } from "../lib/supabase";
 
 export default function BlogSection() {
+  
   const { data: blogPosts = [], isLoading } = useQuery<BlogPost[]>({
     queryKey: ["/api/blog-posts"],
-    queryFn: () => fetch("/api/blog-posts?published=true").then(res => res.json()),
+    queryFn: () => fetch(getApiUrl("/api/blog-posts?published=true")).then(res => res.json()),
   });
 
   if (isLoading) {
@@ -31,7 +33,7 @@ export default function BlogSection() {
             Stay updated with my latest projects, insights, and achievements in the world of technology.
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.slice(0, 3).map((post, index) => (
             <Link key={post.id} to={`/blog/${post.slug}`}>

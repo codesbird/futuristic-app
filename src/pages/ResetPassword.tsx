@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Shield, Mail, Lock, User, Key } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
+import { getApiUrl } from "../lib/supabase";
 
 
 export default function ResetPassword() {
@@ -35,7 +36,7 @@ export default function ResetPassword() {
         try {
             console.log("Sending reset password request with token:", newPassword.password, authtoken);
 
-            const response = await fetch("/api/auth/reset-password", {
+            const response = await fetch(getApiUrl("/api/auth/reset-password"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

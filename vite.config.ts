@@ -27,7 +27,7 @@ export default defineConfig({
       "@shared": path.resolve(__dirname, "shared"),
     },
   },
-  root: path.resolve(__dirname, "src"),
+  // root removed: use project root so .env is loaded correctly
   build: {
     outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
@@ -37,13 +37,7 @@ export default defineConfig({
       strict: true,
       deny: ["**/.*"],
     },
-    proxy: {
-      '/api': {
-        target: 'https://tech2saini-server-production.up.railway.app', // Use IPv4 to avoid ::1 issues
-        changeOrigin: true,
-        secure: false,
-      },
-    },
+    // Proxy removed for production-ready config. Use VITE_API_URL in your code for API calls.
     hmr: {
       overlay: false,
     },

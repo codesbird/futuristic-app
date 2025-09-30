@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Linkedin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import emailjs from '@emailjs/browser';
+import { getApiUrl } from "../lib/supabase";
 
 interface ContactForm {
   name: string;
@@ -40,7 +41,7 @@ export default function ContactSection() {
       
       try {
         // Get EmailJS credentials from server-side endpoint
-        const configResponse = await fetch('/api/email-config');
+        const configResponse = await fetch(getApiUrl('/api/email-config'));
         const config = await configResponse.json();
         
         await emailjs.send(

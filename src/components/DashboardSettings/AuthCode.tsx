@@ -14,8 +14,14 @@ export default function AuthCode() {
     const [token, setToken] = useState("");
     const [isQrcode, setIsQrcode] = useState(false);
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const getApiUrl = (path: string) => {
+        if (!apiUrl) return path;
+        return apiUrl.replace(/\/$/, "") + (path.startsWith("/") ? path : "/" + path);
+    };
+
     const authuser = async () => {
-        const res = await fetch("/api/auth/user", { method: "GET" });
+        const res = await fetch(getApiUrl("/api/auth/user"), { method: "GET" });
         const data = await res.json();
         if (data.success === false) {
             return false
@@ -39,7 +45,7 @@ export default function AuthCode() {
         e.target.disabled = true;
 
         // 🔹 Call backend to generate secret + otpauth URL
-        const res = await fetch("/api/auth/setup-2fa", { method: "POST" });
+    const res = await fetch(getApiUrl("/api/auth/setup-2fa"), { method: "POST" });
         const data = await res.json();
         if (data.success === false) {
             toast({ title: "Error", description: data.error, variant: "destructive" });
@@ -61,7 +67,7 @@ export default function AuthCode() {
         e.target.innerText = text + "ing...";
         e.target.disabled = true;
 
-        const res = await fetch("/api/auth/verify-2fa", {
+        const res = await fetch(getApiUrl("/api/auth/verify-2fa"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ token, secret }),
@@ -100,7 +106,7 @@ export default function AuthCode() {
         e.target.innerText = text + "ing...";
         e.target.disabled = true;
 
-        const response = await fetch("/api/auth/disable-2fa", { method: "POST" });
+    const response = await fetch(getApiUrl("/api/auth/disable-2fa"), { method: "POST" });
         const data = await response.json();
         if (data.success === false) {
             toast({ title: "Error", description: data.error, variant: "destructive" });

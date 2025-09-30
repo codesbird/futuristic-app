@@ -11,6 +11,12 @@ function ChangePassword(props) {
     const [newPassword, setNewPassword] = useState("");
     const [isChanging, setIsChanging] = useState(false);
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const getApiUrl = (path: string) => {
+        if (!apiUrl) return path;
+        return apiUrl.replace(/\/$/, "") + (path.startsWith("/") ? path : "/" + path);
+    };
+
     return (
         <>
             {/* Change password for your account to enhance security. */}
@@ -59,7 +65,7 @@ function ChangePassword(props) {
                                     }
                                     // Call API to change password here
                                     // Example:
-                                    const response = await fetch("/api/auth/change-password", {
+                                    const response = await fetch(getApiUrl("/api/auth/change-password"), {
                                         method: "POST",
                                         headers: { "Content-Type": "application/json" },
                                         body: JSON.stringify({ currentPassword, newPassword }),

@@ -11,7 +11,14 @@ function TelegramSetup({ userData }) {
     const [isChanging, setIsChanging] = useState(false);
     const { user, isLoading, error } = useAuth();
 
+
     console.log("The use is : ", user)
+
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const getApiUrl = (path: string) => {
+        if (!apiUrl) return path;
+        return apiUrl.replace(/\/$/, "") + (path.startsWith("/") ? path : "/" + path);
+    };
     // Normalize state
     const [telegramData, setTelegramData] = useState({ "chatid": user?.chatid, "token": user?.token, "enabled": user?.enabled });
 
@@ -37,7 +44,7 @@ function TelegramSetup({ userData }) {
         }
 
         try {
-            const response = await fetch("/api/auth/save-tel-info", {
+            const response = await fetch(getApiUrl("/api/auth/save-tel-info"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -93,7 +100,7 @@ function TelegramSetup({ userData }) {
                                 className="border-gray-600 text-gray-300 hover:bg-gray-600"
                                 onClick={async () => {
                                     try {
-                                        const response = await fetch('/api/auth/telegram-message-disable', {
+                                        const response = await fetch(getApiUrl('/api/auth/telegram-message-disable'), {
                                             method: "POST",
                                             headers: { "Content-Type": "application/json" },
                                         })
@@ -103,7 +110,7 @@ function TelegramSetup({ userData }) {
                                             return;
                                         }
                                         toast({ title: "Telegram update success!", description: data.message })
-                                        setTelegramData({...telegramData,['enabled']:false})
+                                        setTelegramData({ ...telegramData, ['enabled']: false })
                                     }
                                     catch (error) {
 
