@@ -5,7 +5,6 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { apiRequest } from "@/lib/queryClient";
 import { BlogPost } from "@shared/schema";
-import { ConsoleLogWriter } from "drizzle-orm";
 
 export default function BlogPage() {
   const { slug } = useParams<{ slug: string }>();
