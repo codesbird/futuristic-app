@@ -39,7 +39,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'https://tech2saini-server-production.up.railway.app/', // Use IPv4 to avoid ::1 issues
+        target: 'https://tech2saini-server-production.up.railway.app', // Use IPv4 to avoid ::1 issues
         changeOrigin: true,
         secure: false,
       },
