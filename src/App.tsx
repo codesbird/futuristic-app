@@ -6,12 +6,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/use-auth";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
-import AdminLogin from "@/pages/admin-login";
-import AdminDashboard from "@/pages/admin-dashboard";
-import ProjectPage from "@/pages/project-page";
-import BlogPage from "@/pages/blog-page";
-import ForgotPassword from "@/pages/forgot-password";
-import ResetPassword from "@/pages/reset-password";
+import AdminLogin from "@/pages/AdminLogin";
+import AdminDashboard from "@/pages/AdminDashboard";
+import ProjectPage from "@/pages/ProjectPage";
+import BlogPage from "@/pages/BlogPage";
+import ForgotPassword from "@/pages/ForgotPassword";
+import ResetPassword from "@/pages/ResetPassword";
 
 function Router() {
   return (
