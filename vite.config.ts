@@ -12,6 +12,14 @@ export default defineConfig({
   plugins: [
     react(),
     runtimeErrorOverlay(),
+    ...(process.env.NODE_ENV !== "production" &&
+    process.env.REPL_ID !== undefined
+      ? [
+          await import("@replit/vite-plugin-cartographer").then((m) =>
+            m.cartographer(),
+          ),
+        ]
+      : []),
   ],
   resolve: {
     alias: {
@@ -28,6 +36,16 @@ export default defineConfig({
     fs: {
       strict: true,
       deny: ["**/.*"],
+    },
+    proxy: {
+      '/api': {
+        target: 'https://tech2saini-server-production.up.railway.app/', // Use IPv4 to avoid ::1 issues
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+    hmr: {
+      overlay: false,
     },
   },
 });
