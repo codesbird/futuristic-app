@@ -92,13 +92,11 @@ export default function AdminDashboard() {
   const { data: skills = [], refetch: refetchSkills } = useQuery<Skill[]>({ queryKey: ["/api/skills"] });
   const { data: services = [], refetch: refetchServices } = useQuery<Service[]>({ queryKey: ["/api/services"] });
   const { data: projects = [], refetch: refetchProjects } = useQuery<Project[]>({ queryKey: ["/api/projects"] });
-  const { data: blogPosts = [], refetch: refetchBlogPosts } = useQuery<BlogPost[]>({
-    queryKey: ["/api/blog-posts"],
-    queryFn: () => fetch(getApiUrl("/api/blog-posts?published=false")).then(res => res.json())
-  });
-  const { data: messages = [], refetch: refetchMessages } = useQuery<ContactMessage[]>({ queryKey: ["/api/contact-messages"] });
+  const { data: blogPosts = [], refetch: refetchBlogPosts } = useQuery<BlogPost[]>({queryKey: ["/api/blog-posts"]});
   const { data: experiences = [], refetch: refetchExperiences } = useQuery<Experience[]>({ queryKey: ["/api/experiences"] });
+  const { data: messages = [], refetch: refetchMessages } = useQuery<ContactMessage[]>({ queryKey: ["/api/contact-messages"] });
   const { data: newslatteres = [], refetch: refetchNewslatters } = useQuery<Experience[]>({ queryKey: ["/api/newsletter/subscribers"] });
+  console.log("messages are :",messages)
 
 
   if (!user) {

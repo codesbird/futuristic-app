@@ -13,7 +13,7 @@ export default function AdminLogin() {
   const [, setLocation] = useLocation();
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-  
+
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -138,164 +138,71 @@ export default function AdminLogin() {
             </CardContent>
           </Card>
         ) : (
-          <Tabs defaultValue="login" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-dark-secondary border border-gray-600">
-              <TabsTrigger value="login" className="text-white data-[state=active]:bg-tech-light/20 data-[state=active]:text-tech-light">
-                Login
-              </TabsTrigger>
-              <TabsTrigger value="register" className="text-white data-[state=active]:bg-tech-light/20 data-[state=active]:text-tech-light">
-                Register
-              </TabsTrigger>
-            </TabsList>
 
-            <TabsContent value="login">
-              <Card className="glass-morphism border-tech-light/20">
-                <CardHeader>
-                  <CardTitle className="text-white">Welcome Back</CardTitle>
-                  <CardDescription className="text-gray-400">
-                    Sign in to your admin account
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleLogin} className="space-y-4">
-                    <div>
-                      <Label htmlFor="email" className="text-white">Email</Label>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="admin@tech2saini.com"
-                          value={loginForm.email}
-                          onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
-                          className="pl-12 bg-dark-bg/50 border-gray-600 text-white placeholder-gray-400 focus:border-tech-light"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="password" className="text-white">Password</Label>
-                      <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                        <Input
-                          id="password"
-                          type="password"
-                          placeholder="••••••••••••••••"
-                          value={loginForm.password}
-                          onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
-                          className="pl-12 bg-dark-bg/50 border-gray-600 text-white placeholder-gray-400 focus:border-tech-light"
-                          required
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="remember" className="text-gray-400">
-                        <input
-                          id="remember"
-                          type="checkbox"
-                          className="mr-2"
-                        />
-                        Remember me
-                      </Label>
-                      <Link href="/forgot-password" className="text-tech-light hover:underline">
-                        Forgot Password?
-                      </Link>
-                    </div>
-                    <Button
-                      type="submit"
-                      className="w-full bg-gradient-to-r from-tech-blue to-tech-light hover:shadow-lg hover:shadow-tech-light/50"
-                      disabled={loginMutation.isPending}
-                    >
-                      {loginMutation.isPending ? "Signing in..." : "Sign In"}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
+          <Card className="glass-morphism border-tech-light/20">
+            <CardHeader>
+              <CardTitle className="text-white">Welcome Back</CardTitle>
+              <CardDescription className="text-gray-400">
+                Sign in to your admin account
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleLogin} className="space-y-4">
+                <div>
+                  <Label htmlFor="email" className="text-white">Email</Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="admin@tech2saini.com"
+                      value={loginForm.email}
+                      onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
+                      className="pl-12 bg-dark-bg/50 border-gray-600 text-white placeholder-gray-400 focus:border-tech-light"
+                      required
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="password" className="text-white">Password</Label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="••••••••••••••••"
+                      value={loginForm.password}
+                      onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+                      className="pl-12 bg-dark-bg/50 border-gray-600 text-white placeholder-gray-400 focus:border-tech-light"
+                      required
+                    />
+                  </div>
+                </div>
 
-            <TabsContent value="register">
-              <Card className="glass-morphism border-tech-light/20">
-                <CardHeader>
-                  <CardTitle className="text-white">Create Account</CardTitle>
-                  <CardDescription className="text-gray-400">
-                    Set up your admin account
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleRegister} className="space-y-4">
-                    <div>
-                      <Label htmlFor="name" className="text-white">Full Name</Label>
-                      <div className="relative">
-                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                        <Input
-                          id="name"
-                          type="text"
-                          placeholder="Monu Saini"
-                          value={registerForm.name}
-                          onChange={(e) => setRegisterForm({ ...registerForm, name: e.target.value })}
-                          className="pl-12 bg-dark-bg/50 border-gray-600 text-white placeholder-gray-400 focus:border-tech-light"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="reg-email" className="text-white">Email</Label>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                        <Input
-                          id="reg-email"
-                          type="email"
-                          placeholder="admin@tech2saini.com"
-                          value={registerForm.email}
-                          onChange={(e) => setRegisterForm({ ...registerForm, email: e.target.value })}
-                          className="pl-12 bg-dark-bg/50 border-gray-600 text-white placeholder-gray-400 focus:border-tech-light"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="reg-password" className="text-white">Password</Label>
-                      <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                        <Input
-                          id="reg-password"
-                          type="password"
-                          placeholder="••••••••"
-                          value={registerForm.password}
-                          onChange={(e) => setRegisterForm({ ...registerForm, password: e.target.value })}
-                          className="pl-12 bg-dark-bg/50 border-gray-600 text-white placeholder-gray-400 focus:border-tech-light"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="confirm-password" className="text-white">Confirm Password</Label>
-                      <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                        <Input
-                          id="confirm-password"
-                          type="password"
-                          placeholder="••••••••"
-                          value={registerForm.confirmPassword}
-                          onChange={(e) => setRegisterForm({ ...registerForm, confirmPassword: e.target.value })}
-                          className="pl-12 bg-dark-bg/50 border-gray-600 text-white placeholder-gray-400 focus:border-tech-light"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <Button
-                      type="submit"
-                      className="w-full bg-gradient-to-r from-tech-blue to-tech-light hover:shadow-lg hover:shadow-tech-light/50"
-                      disabled={registerMutation.isPending || registerForm.password !== registerForm.confirmPassword}
-                    >
-                      {registerMutation.isPending ? "Creating Account..." : "Create Account"}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="remember" className="text-gray-400">
+                    <input
+                      id="remember"
+                      type="checkbox"
+                      className="mr-2"
+                    />
+                    Remember me
+                  </Label>
+                  <Link href="/forgot-password" className="text-tech-light hover:underline">
+                    Forgot Password?
+                  </Link>
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-tech-blue to-tech-light hover:shadow-lg hover:shadow-tech-light/50"
+                  disabled={loginMutation.isPending}
+                >
+                  {loginMutation.isPending ? "Signing in..." : "Sign In"}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+
         )}
 
         <div className="mt-6 text-center">

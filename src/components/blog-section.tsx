@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { getApiUrl } from "../lib/supabase";
 
 export default function BlogSection() {
-  
+
   const { data: blogPosts = [], isLoading } = useQuery<BlogPost[]>({
     queryKey: ["/api/blog-posts"],
     queryFn: () => fetch(getApiUrl("/api/blog-posts?published=true")).then(res => res.json()),
@@ -38,6 +38,14 @@ export default function BlogSection() {
           {blogPosts.slice(0, 3).map((post, index) => (
             <Link key={post.id} to={`/blog/${post.slug}`}>
               <div className="glass-morphism rounded-xl overflow-hidden group hover:scale-105 transition-all duration-300 cursor-pointer">
+                <div className={`relative h-48 bg-gradient-to-br from to-dark-secondary overflow-hidden`}>
+                  <img
+                    src={post.featured_image}
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/80 to-transparent" />
+                </div>
                 <div className="p-6">
                   <div className="text-sm text-neon-cyan mb-2">{format(new Date(post.createdAt), "MMMM dd, yyyy")}</div>
                   <h3 className="text-lg font-bold mb-3 group-hover:text-tech-light transition-colors">

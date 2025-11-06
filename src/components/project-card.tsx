@@ -22,14 +22,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           boxShadow: isHovered ? '0 15px 30px rgba(0, 255, 255, 0.15)' : 'none'
         }}
       >
-        <div className={`relative h-48 bg-gradient-to-br from-${project.gradientFrom} to-dark-secondary overflow-hidden`}>
-          <img 
-            src={project.image} 
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/80 to-transparent" />
-        </div>
+        
         <div className="p-6">
           <h3 className="text-xl font-bold mb-2 group-hover:text-tech-light transition-colors">
             {project.title}
