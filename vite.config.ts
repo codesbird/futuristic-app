@@ -35,7 +35,7 @@ export default defineConfig({
   server: {
     fs: {
       strict: true,
-      deny: ["**/.*"],
+      deny: ["https://server-6x2b.vercel.app"],
     },
     // Proxy removed for production-ready config. Use VITE_API_URL in your code for API calls.
     hmr: {
